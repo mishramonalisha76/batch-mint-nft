@@ -85,3 +85,16 @@ body{
 .secondimg {
   transform: rotate(101deg);
 }
+.custom-file-input{
+  color: transparent;
+  width: 10vw;
+}
+.custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.custom-file-input::before {
+  color: black;
+  padding-left: 6%;
+  font-weight: bold;
+  content: 'Upload File';
+}

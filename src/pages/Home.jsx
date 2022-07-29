@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CSVInput from "../components/CSVInput";
+import { Buffer } from "buffer";
 // import Web3 from "web3";
 import { Contract, ethers } from "ethers";
 import NFTForm from "../components/NFTForm";
@@ -8,6 +9,7 @@ import DeployContractABI from "../config/DeployContractABI";
 import NFTBulkMintABI from "../config/NFTBulkMint";
 import { useCSVReader } from "react-papaparse";
 import WalletIcon from "../assets/wallet.png";
+import client from "../helper/ipfs";
 import NFTIcon from "../assets/NFT2.png";
 const Home = (props) => {
   const [address, setAddress] = useState(null);
@@ -21,7 +23,7 @@ const Home = (props) => {
   const [signerObject, setSigner] = useState(null);
   const [addressArray, setAddressArray] = useState(null);
   let NFTContract;
-
+  console.log(NFTUri)
   const styles = {
     subContainer: {
       backgroundColor: "white",
@@ -200,7 +202,25 @@ const Home = (props) => {
       }
     }
   };
-
+  const handleFileUpload = async(e)=>{
+    console.log(e);
+    let buffer;
+      const reader = new window.FileReader();
+      reader.readAsArrayBuffer(e);
+      reader.onloadend = async()=>{
+        buffer = (Buffer(reader.result))
+        console.log(buffer)
+        try{
+          const created = await client.add(buffer);
+          const url = `https://ipfs.infura.io/ipfs/${created.path}`;
+          console.log(url)
+          setNFTUri(url)
+    
+        }catch(error){
+    
+        }
+      }
+  }
   const deployNFTBathTransferContract = () => {
     console.log(NFTName);
     console.log(NFTSymbol);
@@ -238,7 +258,6 @@ const Home = (props) => {
         });
     }
   };
-
   return (
     <div className="container">
       <div className="container-item first-div">
@@ -326,6 +345,26 @@ const Home = (props) => {
                   type="text"
                   onChange={(e) => {
                     setNFTUri(e.target.value);
+                  }}
+                />
+              </div>
+              <div>
+                <p style={{ fontWeight: "bold" }}>OR</p>
+                <input
+                 className="custom-file-input"
+                  style={{
+                    paddingBottom: "2%",
+                    paddingLeft: "15%",
+                    paddingTop: "8px",
+                    paddingRight: "-14%",
+                    borderRadius: "7px",
+                    borderWidth: "1px",
+                    background:
+                      "linear-gradient(to bottom, #ccffff 0%, #ffccff 100%)",
+                  }}
+                  type="file"
+                  onChange={(e) => {
+                    handleFileUpload(e.target.files[0]);
                   }}
                 />
               </div>
