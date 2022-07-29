@@ -8,6 +8,7 @@ import DeployContractABI from "../config/DeployContractABI";
 import NFTBulkMintABI from "../config/NFTBulkMint";
 import { useCSVReader } from "react-papaparse";
 import WalletIcon from "../assets/wallet.png";
+import NFTIcon from "../assets/NFT2.png";
 const Home = (props) => {
   const [address, setAddress] = useState(null);
   const [NFTName, setNFTName] = useState(null);
@@ -240,119 +241,126 @@ const Home = (props) => {
 
   return (
     <div className="container">
-      <div className="image-div">
-        <img className="image" src={WalletIcon} alt="walletIcon" />
+      <div className="container-item first-div">
+        <h1 style={{ fontSize: "5rem" }}>
+          Welcome to <span style={{ color: "purple" }}>MINTOS</span>
+        </h1>
+        <h2>A One-stop No-code Solution to Batch Mint NFTs</h2>
+        <div>
+          {address && address.length == 0 ? (
+            <button
+              className="container-button"
+              onClick={() => {
+                connectWalletAction();
+              }}
+            >
+              Connect Wallet
+            </button>
+          ) : (
+            <p className="address">{address}</p>
+          )}
+
+          <br />
+        </div>
       </div>
+
       <div className="container-content">
-        <div className="container-item first-div">
-          <h1 style={{ fontSize: "3rem" }}>
-            Welcome to <span style={{ color: "purple" }}>NFT For All</span>
-          </h1>
-          <div>
-            {address && address.length == 0 ? (
-              <button
-                className="container-button"
-                onClick={() => {
-                  connectWalletAction();
-                }}
-              >
-                Connect Wallet
-              </button>
-            ) : (
-              <p className="address">{address}</p>
-            )}
+        <div className="image-div">
+          <img className="image" src={WalletIcon} alt="walletIcon" />
+        </div>
+        <div className="container-form-content">
+          <div className="container-item">
+            <form>
+              <h1 style={{ fontSize: "2.5rem" }}>Fill Your NFT Details</h1>
+              <div>
+                <p style={{ fontWeight: "bold" }}>Enter Your NFT Name</p>
+                <input
+                  style={{
+                    paddingBottom: "2%",
+                    paddingLeft: "15%",
+                    paddingTop: "8px",
+                    paddingRight: "-14%",
+                    borderRadius: "7px",
+                    borderWidth: "1px",
+                    background:
+                      "linear-gradient(to bottom, #ccffff 0%, #ffccff 100%)",
+                  }}
+                  type="text"
+                  onChange={(e) => {
+                    setNFTName(e.target.value);
+                  }}
+                />
+              </div>
+              <div>
+                <p style={{ fontWeight: "bold" }}>Enter Your NFT Symbol</p>
+                <input
+                  style={{
+                    paddingBottom: "2%",
+                    paddingLeft: "15%",
+                    paddingTop: "8px",
+                    paddingRight: "-14%",
+                    borderRadius: "7px",
+                    borderWidth: "1px",
+                    background:
+                      "linear-gradient(to bottom, #ccffff 0%, #ffccff 100%)",
+                  }}
+                  type="text"
+                  onChange={(e) => {
+                    setNFTSymbol(e.target.value);
+                  }}
+                />
+              </div>
+              <div>
+                <p style={{ fontWeight: "bold" }}>Enter Your NFT Token URI</p>
+                <input
+                  style={{
+                    paddingBottom: "2%",
+                    paddingLeft: "15%",
+                    paddingTop: "8px",
+                    paddingRight: "-14%",
+                    borderRadius: "7px",
+                    borderWidth: "1px",
+                    background:
+                      "linear-gradient(to bottom, #ccffff 0%, #ffccff 100%)",
+                  }}
+                  type="text"
+                  onChange={(e) => {
+                    setNFTUri(e.target.value);
+                  }}
+                />
+              </div>
+              <br />
+              <div>
+                <button
+                  className="container-button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    deployNFTBathTransferContract();
+                  }}
+                >
+                  Deploy Contract
+                </button>
+              </div>
+            </form>
+          </div>
 
-            <br />
+          <div className="container-item">
+            <div>
+              <h2 style={{ fontSize: "1.8rem" }}>
+                Upload your CSV file with addresses to bulk mint
+              </h2>
+            </div>
+            <div style={{ width: "50%", marginLeft: "25%" }}>
+              <CSVInput
+                mintNFTs={mintNFTs}
+                addressArray={addressArray}
+                setAddressArray={setAddressArray}
+              />
+            </div>
           </div>
         </div>
-        <div className="container-item">
-          <form>
-            <h1 style={{ fontSize: "2.5rem" }}>Fill Your NFT Details</h1>
-            <div>
-              <p style={{ fontWeight: "bold" }}>Enter Your NFT Name</p>
-              <input
-                style={{
-                  paddingBottom: "2%",
-                  paddingLeft: "15%",
-                  paddingTop: "8px",
-                  paddingRight: "-14%",
-                  borderRadius: "7px",
-                  borderWidth: "1px",
-                  background:
-                    "linear-gradient(to bottom, #ccffff 0%, #ffccff 100%)",
-                }}
-                type="text"
-                onChange={(e) => {
-                  setNFTName(e.target.value);
-                }}
-              />
-            </div>
-            <div>
-              <p style={{ fontWeight: "bold" }}>Enter Your NFT Symbol</p>
-              <input
-                style={{
-                  paddingBottom: "2%",
-                  paddingLeft: "15%",
-                  paddingTop: "8px",
-                  paddingRight: "-14%",
-                  borderRadius: "7px",
-                  borderWidth: "1px",
-                  background:
-                    "linear-gradient(to bottom, #ccffff 0%, #ffccff 100%)",
-                }}
-                type="text"
-                onChange={(e) => {
-                  setNFTSymbol(e.target.value);
-                }}
-              />
-            </div>
-            <div>
-              <p style={{ fontWeight: "bold" }}>Enter Your NFT Token URI</p>
-              <input
-                style={{
-                  paddingBottom: "2%",
-                  paddingLeft: "15%",
-                  paddingTop: "8px",
-                  paddingRight: "-14%",
-                  borderRadius: "7px",
-                  borderWidth: "1px",
-                  background:
-                    "linear-gradient(to bottom, #ccffff 0%, #ffccff 100%)",
-                }}
-                type="text"
-                onChange={(e) => {
-                  setNFTUri(e.target.value);
-                }}
-              />
-            </div>
-            <br />
-            <div>
-              <button
-                className="container-button"
-                onClick={(e) => {
-                  e.preventDefault();
-                  deployNFTBathTransferContract();
-                }}
-              >
-                Deploy Contract
-              </button>
-            </div>
-          </form>
-        </div>
-
-        <div className="container-item">
-          <div>
-            <h2 style={{ fontSize: "1.8rem" }}>
-              Upload your CSV file with addresses to bulk mint
-            </h2>
-          </div>
-          <div style={{ width: "50%", marginLeft: "25%" }}>
-            <CSVInput
-              mintNFTs={mintNFTs}
-              addressArray={addressArray}
-              setAddressArray={setAddressArray}
-            />
-          </div>
+        <div className="image-div secondimg">
+          <img className="image" src={WalletIcon} alt="walletIcon" />
         </div>
       </div>
     </div>
