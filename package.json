@@ -2,7 +2,9 @@
   "name": "mintos",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://mishramonalisha76/mintos/",
   "dependencies": {
+    "@openzeppelin/contracts": "^4.7.2",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
