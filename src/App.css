@@ -17,7 +17,7 @@ body{
   /* background-color: rgb(102, 255, 102); */
 }
 .image-div{
-  align-self:center;
+  align-self:flex-start;
   width: 20vw;
 }
 
