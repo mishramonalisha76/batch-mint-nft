@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/mintos/static/css/main.bec20617.css",
-    "main.js": "/mintos/static/js/main.23431317.js",
+    "main.css": "/mintos/static/css/main.c15acb4a.css",
+    "main.js": "/mintos/static/js/main.e739461b.js",
     "static/js/787.b3fd4f57.chunk.js": "/mintos/static/js/787.b3fd4f57.chunk.js",
     "static/media/NFT2.png": "/mintos/static/media/NFT2.08ead5100b01d69e0677.png",
     "static/media/wallet.png": "/mintos/static/media/wallet.eda28a847d1f6b8cc0f6.png",
     "static/media/logo.svg": "/mintos/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/mintos/index.html",
-    "main.bec20617.css.map": "/mintos/static/css/main.bec20617.css.map",
-    "main.23431317.js.map": "/mintos/static/js/main.23431317.js.map",
+    "main.c15acb4a.css.map": "/mintos/static/css/main.c15acb4a.css.map",
+    "main.e739461b.js.map": "/mintos/static/js/main.e739461b.js.map",
     "787.b3fd4f57.chunk.js.map": "/mintos/static/js/787.b3fd4f57.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.bec20617.css",
-    "static/js/main.23431317.js"
+    "static/css/main.c15acb4a.css",
+    "static/js/main.e739461b.js"
   ]
 }
